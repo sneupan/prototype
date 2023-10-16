@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.201232902048-cuavn8fonfhs4q6e6lg2mcbnakbjt4ep</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>201232902048-cuavn8fonfhs4q6e6lg2mcbnakbjt4ep.apps.googleusercontent.com</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fasthand-Regular.ttf</string>
+		<string>Caprasimo-Regular.ttf</string>
+		<string>Mukta-Light.ttf</string>
+		<string>YsabeauInfant-Italic-VariableFont_wght.ttf</string>
+		<string>YsabeauInfant-VariableFont_wght.ttf</string>
+		<string>Montserrat-Italic.ttf</string>
+		<string>Montserrat-Variable.ttf</string>
+	</array>
+</dict>
+</plist>
