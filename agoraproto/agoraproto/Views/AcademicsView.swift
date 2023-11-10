@@ -8,6 +8,10 @@ import SwiftUI
 
 struct AcademicsView: View {
     @ObservedObject private var viewModel = AcademicsViewViewModel()
+    
+    @State private var isChecked: [Bool] = Array(repeating: false, count: 10)
+    @State private var newElective: String = ""
+    @State private var electives: [String] = []
 
     var body: some View {
         ZStack {
@@ -23,7 +27,7 @@ struct AcademicsView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(spacing: 16) {
-                            TabBarButton(destination:  HomeView(showSignInView: .constant(false)), imageName: "house.fill", label: "Home")
+                            TabBarButton(destination: HomeView(showSignInView: .constant(false)), imageName: "house.fill", label: "Home")
                             TabBarButton(destination: ResourceView(), imageName: "book.fill", label: "Resource")
                             TabBarButton(destination: AcademicsView(), imageName: "pencil.and.outline", label: "Study")
                             TabBarButton(destination: DiningView(), imageName: "utensils", label: "Dine")
@@ -33,12 +37,37 @@ struct AcademicsView: View {
                     }
 
                     VStack(spacing: 16) {
-                        SectionCard(title: "Core Requirements", content: viewModel.academicsModel.coreRequirements)
+                        CoreRequirementsChecklist(content: viewModel.academicsModel.coreRequirements, isChecked: $isChecked)
 
-                        SectionCard(title: "Electives", content: viewModel.academicsModel.electives)
+
+                        VStack(spacing: 8) {
+                            ForEach(electives, id: \.self) { elective in
+                                Text(elective)
+                                    .foregroundColor(.white)
+                            }
+
+                            HStack {
+                                TextField("Add new elective", text: $newElective)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                                Button(action: {
+                                    if !newElective.isEmpty {
+                                        electives.append(newElective)
+                                        newElective = ""
+                                    }
+                                }) {
+                                    Text("Add")
+                                        .linkStyle()
+                                }
+                            }
+                        }
+                        .padding()
+                        .background(Color(red: 60/255, green: 60/255, blue: 60/255))
+                        .cornerRadius(20)
+                        .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
                     }
                     .padding(.horizontal)
-                    .padding(.bottom, 100) // Adjust the bottom padding to create space for scrolling
+                    .padding(.bottom, 100)
                 }
             }
         }
@@ -47,29 +76,44 @@ struct AcademicsView: View {
     }
 }
 
-struct SectionCard: View {
-    var title: String
-    var content: String
-
-    var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
-            .frame(width: 337, height: 250)
-            .overlay(
-                VStack(spacing: 8) {
-                    Text(title)
-                        .font(.title2)
-                        .foregroundColor(.yellow)
-
-                    Text(content)
-                        .font(.body)
-                        .foregroundColor(.white)
+struct CheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                .foregroundColor(configuration.isOn ? .yellow : .white)
+                .font(.title2)
+                .onTapGesture {
+                    configuration.isOn.toggle()
                 }
-                .padding(16)
-            )
-            .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
+            configuration.label
+        }
     }
 }
+
+struct CoreRequirementsChecklist: View {
+    var content: [String]
+    @Binding var isChecked: [Bool]
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            ForEach(0..<content.count, id: \.self) { index in
+                HStack {
+                    Toggle("", isOn: $isChecked[index])
+                        .toggleStyle(CheckboxToggleStyle())
+                        .frame(width: 24)
+                    Text(content[index])
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+        }
+        .padding()
+        .background(Color(red: 60/255, green: 60/255, blue: 60/255))
+        .cornerRadius(20)
+        .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
+    }
+}
+
+
 
 extension View {
     func linkStyle() -> some View {
@@ -87,3 +131,4 @@ struct AcademicsView_Previews: PreviewProvider {
         AcademicsView()
     }
 }
+
