@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0B876D2B06EAE200416DA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0B876C2B06EAE200416DA7 /* ViewController.swift */; };
 		DA31B91E2AF9A30F009039C7 /* apitryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA31B91D2AF9A30F009039C7 /* apitryApp.swift */; };
 		DA31B9202AF9A30F009039C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA31B91F2AF9A30F009039C7 /* ContentView.swift */; };
 		DA31B9222AF9A312009039C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA31B9212AF9A312009039C7 /* Assets.xcassets */; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA0B876C2B06EAE200416DA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DA0B876E2B06ECAF00416DA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA31B91A2AF9A30F009039C7 /* apitry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = apitry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA31B91D2AF9A30F009039C7 /* apitryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apitryApp.swift; sourceTree = "<group>"; };
 		DA31B91F2AF9A30F009039C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,9 +56,11 @@
 		DA31B91C2AF9A30F009039C7 /* apitry */ = {
 			isa = PBXGroup;
 			children = (
+				DA0B876E2B06ECAF00416DA7 /* Info.plist */,
 				DA31B91D2AF9A30F009039C7 /* apitryApp.swift */,
 				DA31B91F2AF9A30F009039C7 /* ContentView.swift */,
 				DA31B92B2AF9A328009039C7 /* APICall.swift */,
+				DA0B876C2B06EAE200416DA7 /* ViewController.swift */,
 				DA31B9212AF9A312009039C7 /* Assets.xcassets */,
 				DA31B9232AF9A312009039C7 /* Preview Content */,
 			);
@@ -142,6 +147,7 @@
 			files = (
 				DA31B9202AF9A30F009039C7 /* ContentView.swift in Sources */,
 				DA31B91E2AF9A30F009039C7 /* apitryApp.swift in Sources */,
+				DA0B876D2B06EAE200416DA7 /* ViewController.swift in Sources */,
 				DA31B92C2AF9A328009039C7 /* APICall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +284,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"apitry/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = apitry/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -306,6 +313,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"apitry/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = apitry/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

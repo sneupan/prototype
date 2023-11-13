@@ -5,46 +5,47 @@
 //  Created by Saskriti Neupane  on 11/6/23.
 //
 
-
 import SwiftUI
 
 struct ContentView: View {
-    @State private var instructor: Instructor?
-    @State private var errorMessage: String?
+    @State private var activities: [ActivityData] = []
+    @State private var showingAlert = false
+    @State private var errorMessage = ""
 
     var body: some View {
-        VStack(alignment: .leading) {
-            if let instructor = instructor {
-                Text(instructor.personName)
-                    .font(.title)
-                Text("PersonID: " + instructor.personName)
-            } else {
-                Text(errorMessage ?? "No data available")
+        NavigationView {
+            List(activities, id: \.activityOffering.name) { activity in
+                Section(header: Text(activity.activityOffering.name)) {
+                    ForEach(activity.scheduleNames, id: \.self) { schedule in
+                        Text(schedule)
+                    }
+                }
+                Section(header: Text("Instructors:")) {
+                    ForEach(activity.activityOffering.instructors, id: \.personName) { instructor in
+                        Text(instructor.personName)
+                    }
+                }
             }
+            .navigationTitle("Class Schedules")
         }
-        .padding(20.0)
         .onAppear {
             fetchData()
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
         }
     }
 
     func fetchData() {
         Task {
             do {
-                let instructor = try await performAPICall()
-                self.instructor = instructor
+                let activitiesData = try await performAPICall()
+                self.activities = activitiesData
             } catch {
-                self.errorMessage = "Error: \(error.localizedDescription)"
-                self.instructor = nil
+                self.errorMessage = error.localizedDescription
+                self.showingAlert = true
             }
         }
-    }
-
-    func performAPICall() async throws -> Instructor {
-        let url = URL(string: "http://localhost:8080/waitlist/waitlistactivityofferings?personId=90000001&termId=kuali.atp.FA2023-2024")!
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let instructor = try JSONDecoder().decode(Instructor.self, from: data)
-        return instructor
     }
 }
 
@@ -53,4 +54,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
